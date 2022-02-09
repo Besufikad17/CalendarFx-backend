@@ -67,6 +67,7 @@ utils.gregorianToEthiopic = (year, month, day) => {
     return utils.jdnToEthiopic( jdn, utils.guessEraFromJDN( jdn ) );
 }
 
+utils.genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
 
 module.exports = utils;

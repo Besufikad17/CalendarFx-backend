@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const User = require('../models/userModel');
+const middlewares = {};
 
-function auth(req, res, next) {
+
+middlewares.auth = (req, res, next) => {
     const token = req.header('x-auth-token');
 
     // check for token 
@@ -20,4 +23,20 @@ function auth(req, res, next) {
     }
 }
 
-module.exports = auth;
+middlewares.auth_api_key = (req, res, next) => {
+    const api_key = req.query.api_key;
+
+    console.log(api_key);
+
+    User.findOne({ api_key })
+    .then(user => {
+        if(user){
+            next();
+        }else{
+            return res.status(400).json({ msg: 'Invalid api key!!' });
+        }
+    })
+
+}
+
+module.exports = middlewares;

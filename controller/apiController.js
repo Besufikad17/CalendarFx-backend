@@ -60,8 +60,8 @@ apiController.getAllHolidays = (req,res) => {
 }
 
 apiController.toGeez = (req,res) => {
-    const { number } = req.params;
-
+    const { number } = req.body;
+    console.log(req.body);
     if(!number){
         res.json({ msg: "missing field!!"});
     }else{
