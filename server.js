@@ -5,6 +5,7 @@ const route = require('./routes/routes');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 5000;
 
 
 mongoose.connect("mongodb+srv://besufikad:passbestodb@cluster0.vor9x.mongodb.net/CalenderFx?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true  });
@@ -30,4 +31,4 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json())
 app.use('/api', route)
-app.listen(5000);
+app.listen(PORT);
