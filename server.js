@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 
 
-mongoose.connect("mongodb://localhost:27017/calenderfx", { useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect("mongodb+srv://besufikad:passbestodb@cluster0.vor9x.mongodb.net/CalenderFx?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true  });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.log('Error in the database:', err);
