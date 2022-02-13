@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    requestes : {
+        type: Number,
+        default: 0
+    },
     registerd_date: {
         type: Date,
         default: Date.now

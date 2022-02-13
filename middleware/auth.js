@@ -31,6 +31,8 @@ middlewares.auth_api_key = (req, res, next) => {
     User.findOne({ api_key })
     .then(user => {
         if(user){
+            user.requestes++;
+            user.save();
             next();
         }else{
             return res.status(400).json({ msg: 'Invalid api key!!' });

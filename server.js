@@ -5,10 +5,12 @@ const route = require('./routes/routes');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const localURI = require('./config/default.json').localMongoURI;
 const PORT = process.env.PORT || 5000;
 
 
-mongoose.connect("mongodb+srv://besufikad:passbestodb@cluster0.vor9x.mongodb.net/CalenderFx?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true  });
+
+mongoose.connect(localURI, { useNewUrlParser: true, useUnifiedTopology: true  });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.log('Error in the database:', err);

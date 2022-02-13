@@ -1,6 +1,6 @@
 const ab = require('abushakir');
 const gcConvertor = require('../controller/util/util');
-
+const User = require('../models/userModel');
 const gcToec = gcConvertor.gregorianToEthiopic;
 const EtDatetime = ab.EtDatetime;
 const ETC = ab.ETC;
