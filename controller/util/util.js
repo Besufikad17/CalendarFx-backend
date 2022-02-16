@@ -69,5 +69,13 @@ utils.gregorianToEthiopic = (year, month, day) => {
 
 utils.genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
-
+utils.checkInternet = () => {
+    require('dns').lookup('google.com',function(err) {
+        if (err && err.code == "ENOTFOUND") {
+            return false
+        } else {
+            return true
+        }
+    })
+}
 module.exports = utils;
