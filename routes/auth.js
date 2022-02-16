@@ -32,7 +32,8 @@ auth.auth = async (req, res) => {
                                     username: user.username,
                                     email: user.email,
                                     password: password,
-                                    api_key: user.api_key
+                                    api_key: user.api_key,
+                                    role: user.role
                                 }
                             })
                         })

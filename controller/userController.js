@@ -13,7 +13,7 @@ userController.signup = (req, res) => {
     const { username, email, password, purpose } = req.body;
     const role = "member";
 
-    //simple validation
+    //simple valemailation
     if (!username || !email || !password || !purpose) {
         console.log('Please enter all fields');
         return res.status(400).json({ msg: 'Please enter all fields' });
@@ -42,15 +42,16 @@ userController.signup = (req, res) => {
                         newAcccount.password = hash;
                         newAcccount.save().
                             then(user => {
-                                jwt.sign({ id: user.id }, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
+                                jwt.sign({ email: user.email }, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
                                     if (err) throw err;
                                     res.json({
                                         token,
                                         user: {
-                                            id: user.id,
+                                            email: user.email,
                                             username: user.username,
                                             email: user.email,
-                                            api_key: user.api_key
+                                            api_key: user.api_key,
+                                            role: user.role
                                         }
                                     })
                                 })
@@ -97,7 +98,7 @@ userController.getAllUsers = async (req, res) => {
 
 userController.getUserById = async (req, res) => {
     console.log(req.params)
-    User.findOne({ _id: { $in: mongoose.Types.ObjectId(req.params.id) } }, function (err, user) {
+    User.findOne({ _id: { $in: mongoose.Types.Objectemail(req.params.id) } }, function (err, user) {
         if (user) {
             res.json(user)
         }
@@ -123,7 +124,7 @@ userController.getUserByUsername = async (req, res) => {
 userController.updateProfile = async (req, res) => {
     const { username, email, password } = req.body;
 
-    //simple validation
+    //simple valemailation
     if (!username || !email || !password) {
         console.log('Please enter all fields');
         return res.status(400).json({ msg: 'Please enter all fields' });
@@ -146,11 +147,12 @@ userController.updateProfile = async (req, res) => {
 
                 res.json({
                     user: {
-                        id: user.id,
+                        email: user.email,
                         username: user.username,
                         email: user.email,
                         password: password,
-                        api_key: user.api_key
+                        api_key: user.api_key,
+                        role: user.role
                     }
                 })
 
@@ -166,7 +168,7 @@ userController.changePassword = async (req, res) => {
     const { email, newPassword, comfirmedPassword } = req.body;
     const verificationCode = apiKeyGen(4);
 
-    // validating field
+    // valemailating field
 
     if (!email || !newPassword || !comfirmedPassword) {
         console.log('Please enter all fields');
@@ -221,7 +223,7 @@ userController.changePassword = async (req, res) => {
 
                 res.json({
                     user: {
-                        id: user.id,
+                        email: user.email,
                         username: user.username,
                         email: user.email,
                         password: newPassword,
@@ -237,6 +239,24 @@ userController.changePassword = async (req, res) => {
         .catch(err => {
             console.log(err);
         })
+}
+
+userController.removeUser = async(req,res) => {
+    const { id } = req.body;
+
+    if(!id){
+        console.log('Please enter all fields');
+        return res.status(400).json({ msg: 'Please enter all fields' });
+    }
+
+    User.findByIdAndRemove({"_id" : new mongoose.Types.Objectemail(id)})
+    .then(res => {
+        res.send("Done")
+    })
+    .catch(err => {
+        return res.status(400).json({ msg : "something went wrong!!", details: err})
+    })
+
 }
 
 module.exports = userController;

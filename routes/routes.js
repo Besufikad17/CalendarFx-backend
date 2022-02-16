@@ -20,6 +20,7 @@ router.put('/change_password', userController.changePassword);
 router.get('/users', userController.getAllUsers);
 router.get('/user/id/:id',  userController.getUserById);
 router.get('/user/:username',  userController.getUserByUsername);
+router.delete('/remove', userController.removeUser);
 
 
 //api end points
