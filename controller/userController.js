@@ -98,7 +98,7 @@ userController.getAllUsers = async (req, res) => {
 
 userController.getUserById = async (req, res) => {
     console.log(req.params)
-    User.findOne({ _id: { $in: mongoose.Types.Objectemail(req.params.id) } }, function (err, user) {
+    User.findOne({ _id: { $in: mongoose.Types.ObjectId(req.params.id) } }, function (err, user) {
         if (user) {
             res.json(user)
         }
@@ -242,18 +242,20 @@ userController.changePassword = async (req, res) => {
 }
 
 userController.removeUser = async(req,res) => {
-    const { id } = req.body;
+    const { id } = req.query;
+    console.log(id);
 
     if(!id){
         console.log('Please enter all fields');
         return res.status(400).json({ msg: 'Please enter all fields' });
     }
 
-    User.findByIdAndRemove({"_id" : new mongoose.Types.Objectemail(id)})
-    .then(res => {
-        res.send("Done")
+    User.findByIdAndRemove({"_id" : new mongoose.Types.ObjectId(id)})
+    .then(resp => {
+        res.send('Done')
     })
     .catch(err => {
+        console.log(err);
         return res.status(400).json({ msg : "something went wrong!!", details: err})
     })
 
