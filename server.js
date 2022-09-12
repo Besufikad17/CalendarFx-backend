@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 let isConnected = util.checkInternet;
 let URI = isConnected ? hostedURI : localURI;
-mongoose.connect(localURI, { useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect(hostedURI, { useNewUrlParser: true, useUnifiedTopology: true  });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.log('Error in the database:', err);
