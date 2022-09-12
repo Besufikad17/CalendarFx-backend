@@ -1,6 +1,0 @@
-{
-    "localMongoURI": "mongodb://localhost:27017/calenderfx",
-    "hostedMongoURI":"mongodb+srv://besufikad:passbestodb@cluster0.vor9x.mongodb.net/CalenderFx?retryWrites=true&w=majority",
-    "jwtSecret": "calenderfx_jwt",
-    "dev_gmail_pass": "passjohntogmail123"
-}
