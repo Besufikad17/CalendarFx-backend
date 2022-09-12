@@ -8,11 +8,12 @@ const bodyParser = require('body-parser');
 const localURI = require('./config/default.json').localMongoURI;
 const hostedURI = require('./config/default.json').hostedMongoURI;
 const util = require('./controller/util/util');
+const serverless = require('serverless-http');
 const PORT = process.env.PORT || 5000;
 
 let isConnected = util.checkInternet;
 let URI = isConnected ? hostedURI : localURI;
-mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect(localURI, { useNewUrlParser: true, useUnifiedTopology: true  });
 mongoose.Promise = global.Promise;
 mongoose.connection.on('error', (err) => {
   console.log('Error in the database:', err);
@@ -35,4 +36,5 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json())
 app.use('/api', route)
-app.listen(PORT);
+app.listen(PORT)
+

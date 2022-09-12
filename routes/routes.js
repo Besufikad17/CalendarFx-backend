@@ -18,7 +18,7 @@ router.put('/change_password', userController.changePassword);
 // admin end points
 
 router.get('/users', userController.getAllUsers);
-router.get('/user/id/:id',  userController.getUserById);
+router.get('/user/:id',  userController.getUserById);
 router.get('/user/:username',  userController.getUserByUsername);
 router.delete('/remove', userController.removeUser);
 
