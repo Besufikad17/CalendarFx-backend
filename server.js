@@ -31,6 +31,9 @@ app.use((req,res,next) => {
     next();
 })
 
+app.get('/', (req,res) => {
+  res.send('<h1>Welcome to CalenderFx <a href="https://besufikad17.github.io/CalenderFx-docs/">Docs</a><h2>')
+})
 
 app.use(helmet());
 app.use(cors());
